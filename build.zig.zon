@@ -1,0 +1,8 @@
+.{
+    // the name of your project
+    .name = "datetime",
+    // the version of your project
+    .version = "0.0.1",
+    // the actual packages you need as dependencies of your project 
+    .dependencies = .{}
+}
