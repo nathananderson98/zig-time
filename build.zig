@@ -22,14 +22,20 @@ pub fn build(b: *std.Build) void {
 
     // b.installArtifact(exe);
 
-    const lib = b.addStaticLibrary(.{
-        .name = "datetime",
-        .root_source_file = .{ .path = "src/time.zig" },
-        .target = target,
-        .optimize = optimize,
-    });
+    // const lib = b.addStaticLibrary(.{
+    //     .name = "datetime",
+    //     .root_source_file = .{ .path = "src/time.zig" },
+    //     .target = target,
+    //     .optimize = optimize,
+    // });
 
-    b.installArtifact(lib);
+    b.installArtifact(exe);
+
+    const run_cmd = b.addRunArtifact(exe);
+    run_cmd.step.dependOn(b.getInstallStep());
+    if (b.args) |args| {
+        run_cmd.addArgs(args);
+    }
 
     // const main_tests = b.addTest(.{
     //     .root_source_file = .{ .path = "src/main.zig" },
